@@ -5,9 +5,11 @@ import FoodList from './components/FoodList'
 function App() {
   const [results, setResults] = useState([])
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const handleSearch = async (url) => {
     setLoading(true)
+    setError(null)
 
     try {
       const response = await fetch(url)
@@ -18,6 +20,7 @@ function App() {
       setResults(filteredProducts)
     } catch (error) {
       console.error('Something went wrong:', error)
+      setError('Failed to fetch food data. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -28,7 +31,8 @@ function App() {
       <h1>🥗 FoodFacts</h1>
       <SearchBar onSearch={handleSearch} />
       {loading && <p>Loading...</p>}
-      {!loading && results.length === 0 && (
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {!loading && results.length === 0 && !error && (
         <p>Search for a food above to see its nutrition info.</p>
       )}
       <FoodList products={results} />
