@@ -28,11 +28,11 @@ function App() {
 
   return (
     <div>
-      <error && <p style={{ color: 'red' }}>{error}</p>}
-      {!loading && results.length === 0 && !error
+      <h1>🥗 FoodFacts</h1>
       <SearchBar onSearch={handleSearch} />
       {loading && <p>Loading...</p>}
-      {!loading && results.length === 0 && (
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {!loading && results.length === 0 && !error && (
         <p>Search for a food above to see its nutrition info.</p>
       )}
       <FoodList products={results} />
