@@ -9,7 +9,7 @@ function FoodList({ products }) {
         <div className="food-list">
             {products.map((product) => (
                 <FoodCard
-                    key={product.id}
+                    key={product.code || product.id}
                     product={product}
                 />
             ))}
